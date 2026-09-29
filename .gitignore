@@ -31,3 +31,4 @@ scripts/
 # Misc
 *.log
 *.tmp
+.agents/
