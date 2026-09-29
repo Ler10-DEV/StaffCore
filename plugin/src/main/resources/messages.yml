@@ -1,0 +1,65 @@
+# ==============================================================================
+#                      StaffCore Messages (Locale: TR)
+# ==============================================================================
+
+prefix: "&8[&bStaffCore&8] &7"
+no_permission: "&cBu komutu kullanmak için yetkiniz yok!"
+player_only: "&cBu komut yalnızca oyuncular tarafından kullanılabilir."
+player_not_found: "&cOyuncu bulunamadı veya çevrimdışı: &e{player}"
+
+link:
+  code_generated: "&aEşleme kodunuz: &e{code}&a. Discord sunucumuzda &b/esle {code} &akomutunu kullanarak hesabınızı bağlayabilirsiniz. (Geçerlilik: {ttl} saniye)"
+  already_linked: "&cBu Minecraft hesabı zaten bir Discord hesabına bağlı!"
+  success: "&aTebrikler! Discord hesabınız başarıyla Minecraft hesabınızla eşlendi."
+  code_expired: "&cEşleme kodunun süresi dolmuş veya geçersiz!"
+  not_linked: "&cBu işlem için önce Discord hesabınızı eşlemeniz gerekmektedir: &e/hesap-eşle"
+
+auth:
+  quarantine_title: "&c&lYETKİLİ GİRİŞ KALKANI"
+  quarantine_subtitle: "&eLütfen Discord üzerinden 2FA girişinizi onaylayın."
+  approved: "&a2FA Girişiniz onaylandı! Hoş geldiniz."
+  denied: "&c2FA Girişiniz reddedildi veya zaman aşımına uğradı."
+  kick_reason: "StaffCore: 2FA Doğrulaması Başarısız veya Zaman Aşımına Uğradı!"
+
+report:
+  gui_title: "&8Rapor: &c{player}"
+  created: "&a{player} adlı oyuncu hakkındaki raporunuz yetkililere iletildi. Teşekkürler!"
+  cooldown: "&cLütfen tekrar rapor göndermek için &e{seconds} &csaniye bekleyin."
+  staff_notify: "&e[Rapor] &f{reporter} &7-> &c{target} &8(&6{category}&8)"
+
+commandlog:
+  gui_title: "&8Komut Geçmişi: &b{player}"
+  no_logs: "&eBu oyuncuya ait kaydedilmiş komut kaydı bulunmamaktadır."
+
+punishment:
+  applied: "&c{player} adlı oyuncuya ceza uygulandı: &e{reason} &8(ID: #{id})"
+  reason_format: "&cSunucudan uzaklaştırıldınız!\n&7Sebep: &e{reason}\n&7Ceza No: &b#{id}\n&7İtiraz: &fdiscord.gg/sunucu"
+
+kont:
+  started_title: "&c&l⚠️ KONTROLE ALINDINIZ ⚠️"
+  started_subtitle: "&eLütfen Discord sesli kanalına katılın ve ekrandan ayrılmayın!"
+  actionbar_remaining: "&6Kalan Süre: &e{time}"
+  finished_clean: "&aKontrol tamamlandı. Temiz çıktınız! Sabrınız için teşekkürler."
+  finished_hacks: "&cKontrol sonucu hile tespit edildi. Kalıcı olarak uzaklaştırıldınız."
+  finished_confession: "&eİtirafınız kabul edildi. İndirimli ceza uygulandı."
+  combat_quit_ban_reason: "StaffCore: Kontrol Sırasında Çıkış Yapıldı (Hile İtirafı / Combat-Quit)"
+
+score:
+  view: "&b{player} &7Mevcut Yetkili Skoru: &e{score} &8(Haftalık: +{weekly})"
+  low_warning: "&cYetkili skorunuz kritik seviyenin altında (&e{score}&c). Lütfen performansınızı artırın!"
+
+csat:
+  prompt: "&b[StaffCore] &7Yetkili desteğimizi puanlar mısınız? "
+  button_1: "&c[⭐ Kötü] "
+  button_2: "&e[⭐⭐ Orta] "
+  button_3: "&a[⭐⭐⭐ Mükemmel]"
+  voted: "&aGeri bildiriminiz için teşekkürler! ({stars} Yıldız)"
+  already_voted: "&cBu bildirim için zaten oy kullandınız."
+  expired: "&cBu geri bildirimin oylama süresi dolmuş."
+
+admin:
+  reloaded: "&aStaffCore yapılandırması başarıyla yeniden yüklendi."
+  backup_success: "&aVeri yedeği başarıyla oluşturuldu: &e{file}"
+  backup_fail: "&cYedek oluşturulurken hata meydana geldi!"
+  migrate_success: "&aVeriler başarıyla &e{target}&a sürücüsüne aktarıldı ({count} kayıt)."
+  migrate_dryrun: "&e[DRY-RUN] &f{count}&7 kayıt &b{target}&7 sürücüsüne taşınmaya hazır."

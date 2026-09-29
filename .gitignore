@@ -1,0 +1,33 @@
+# Maven & Build artifacts
+target/
+*.jar
+*.war
+*.ear
+*.class
+dependency-reduced-pom.xml
+
+# Node.js
+node_modules/
+package-lock.json
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.DS_Store
+Thumbs.db
+
+# Secrets & Local Data
+secrets.yml
+data/
+backups/
+logs/
+.system_generated/
+scripts/
+
+# Misc
+*.log
+*.tmp

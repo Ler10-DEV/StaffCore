@@ -1,0 +1,142 @@
+# ==============================================================================
+#                      StaffCore Configuration File
+#                   Designed & Engineered by Leronify
+# ==============================================================================
+
+discord:
+  enabled: true
+  bot_token: ""                 # Discord Bot Tokenınızı buraya girin (veya secrets.yml / ENV:DISCORD_BOT_TOKEN)
+  guild_id: "123456789012345678"
+  staff_role_id: "987654321098765432"
+  channels:
+    yetkili_onay: "auto"        # #🔐-yetkili-onay
+    komut_log: "auto"           # #💻-komut-log
+    raporlar: "auto"            # #🚨-raporlar
+    ceza_log: "auto"            # #🔨-ceza-log
+    kont_log: "auto"            # #🔍-kont-log
+    guvenlik_alarmlari: "auto"  # #⚠️-guvenlik-alarmlari
+    haftalik_karne: "auto"      # #📊-haftalik-karne
+    hesap_esle: "auto"          # #🔗-hesap-esle
+  rate_limit:
+    batch_window_ms: 500
+    max_queue_size: 500
+
+storage:
+  # Active storage driver: json | redis | h2 | mysql | postgresql
+  type: json
+
+  # Shared behavior
+  flush_interval_seconds: 30         # Periodic disk write for JSON
+  backup:
+    enabled: true
+    interval_hours: 24
+    retention_days: 7
+    destination: "backups"
+
+  # Driver-specific configuration blocks
+  json:
+    data_dir: "data"
+    pretty_print: false              # Set true for readable indented JSON
+    atomic_write: true               # Uses .tmp -> ATOMIC_MOVE with fallback
+
+  redis:
+    host: "127.0.0.1"
+    port: 6379
+    password: "ENV:STAFFCORE_REDIS_PASS"
+    database: 0
+    key_prefix: "staffcore:"
+    pool:
+      max_total: 16
+      max_idle: 8
+
+  h2:
+    file: "staffcore"
+    mode: "embedded"                 # embedded | server
+    username: "sa"
+    password: ""
+
+  mysql:
+    host: "127.0.0.1"
+    port: 3306
+    database: "staffcore"
+    username: "root"
+    password: "ENV:STAFFCORE_DB_PASS"
+    pool:
+      maximum_pool_size: 10
+      minimum_idle: 2
+      connection_timeout_ms: 5000
+
+  postgresql:
+    host: "127.0.0.1"
+    port: 5432
+    database: "staffcore"
+    username: "staff"
+    password: "ENV:STAFFCORE_DB_PASS"
+    pool:
+      maximum_pool_size: 10
+
+auth:
+  two_factor_enabled: true
+  timeout_seconds: 60
+  freeze_effects: true
+
+link:
+  code_ttl_seconds: 300
+  code_prefix: "MC-"
+
+report:
+  cooldown_seconds: 60
+  notify_sound: true
+
+command_logger:
+  enabled: true
+  buffer_size_per_player: 54
+  mask_patterns:
+    - "(?i)^/(login|register|changepassword|auth|pin|email|pass|setpassword|changepass)\\b.*"
+
+kont:
+  duration_seconds: 300
+  extension_max_count: 15
+  combat_quit_ban: true
+  cleanup_delay_seconds: 60
+
+heuristic:
+  xray:
+    enabled: true
+    window_seconds: 60
+    threshold: 12
+    min_y: 5
+    max_y: 60
+    excluded_worlds:
+      - "world_the_end"
+      - "world_nether"
+  chat_filter:
+    enabled: true
+    patterns:
+      - "(?i)\\b(discord\\.gg|discord\\.com/invite)/\\S+"
+      - "(?i)\\b(reklam|reklamcı|bedava|ücretsiz|kredi)\\b"
+      - "(?i)\\b(küfür1|küfür2|orospu|piç|amk|aq|sikim|yarrak|oç)\\b"
+
+score:
+  base_score: 100
+  low_score_threshold: 50
+  weekly_reset_day: "SUNDAY"
+  weekly_reset_hour: 23
+  weekly_reset_minute: 59
+  matrix:
+    report_resolved: 5
+    kont_clean: 15
+    kont_hacks_banned: 25
+    kont_confession: 10
+    punishment_verified: 5
+    csat_5_stars: 5
+    csat_4_stars: 3
+    csat_3_stars: 1
+    csat_2_stars: -2
+    csat_1_star: -5
+    unjust_punishment_penalty: -20
+    missed_kont_call: -10
+
+csat:
+  enabled: true
+  expiry_minutes: 10

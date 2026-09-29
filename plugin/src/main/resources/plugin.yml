@@ -1,0 +1,65 @@
+name: StaffCore
+version: '1.0.0'
+main: org.staffcore.StaffCorePlugin
+api-version: '1.20'
+author: Leronify
+authors: [Leronify, Antigravity]
+website: https://github.com/Ler10-DEV
+description: Comprehensive Staff and Security Core engineered by Leronify with Pluggable JSON Storage, 2FA, Forensics, and Discord Integration.
+
+permissions:
+  staff.use:
+    description: Base permission for staff members
+    default: op
+  staff.admin:
+    description: Full administrative control over StaffCore
+    default: op
+  staff.report.view:
+    description: Permission to receive and view player reports
+    default: op
+  staff.kont:
+    description: Permission to start and manage kont control sessions
+    default: op
+  staff.commandlog:
+    description: Permission to inspect player command logs
+    default: op
+  staff.punish:
+    description: Permission to issue and verify punishments
+    default: op
+  staff.score.view:
+    description: Permission to view staff score boards
+    default: op
+
+commands:
+  hesap-eşle:
+    description: Discord hesabınızı Minecraft hesabınızla eşlemek için onay kodu üretir.
+    aliases: [hesap-esle, esle, link]
+    usage: /hesap-eşle
+  rapor:
+    description: Bir oyuncuyu şüpheli durum veya kural ihlali nedeniyle raporlar.
+    usage: /rapor <oyuncu>
+  komutlog:
+    description: Bir oyuncunun son gerçekleştirdiği komutları görüntüler.
+    permission: staff.commandlog
+    usage: /komutlog <oyuncu>
+  ceza:
+    description: Oyuncuya kanıt gerektiren resmi bir ceza uygular.
+    permission: staff.punish
+    usage: /ceza <oyuncu> <sebep>
+  kont:
+    description: Şüpheli oyuncuyu adli bilişim incelemesine (freeze/kontrol) alır.
+    permission: staff.kont
+    usage: /kont <baslat|bitir|uzat> <oyuncu> [parametreler]
+  puanla:
+    description: Yetkili hizmetini veya destek sürecini 1-5 yıldız ile puanlar.
+    aliases: [csat, degerlendir, oyla, rate]
+    usage: /puanla <yetkili|ticketId> [1-5] [yorum]
+  staffcore:
+    description: StaffCore ana yönetim komutu.
+    permission: staff.admin
+    aliases: [score, sc]
+    usage: /staffcore <reload|backup|migrate|stats>
+  staffscore:
+    description: Yetkili skor tablosunu görüntüler.
+    permission: staff.score.view
+    usage: /staffscore [oyuncu]
