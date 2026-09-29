@@ -54,7 +54,7 @@ public class XRayHeuristic implements Listener {
 
         int y = block.getY();
         if (y < plugin.getConfigManager().getXRayMinY() || y > plugin.getConfigManager().getXRayMaxY()) {
-            // Outside normal heuristic boundary
+            
             return;
         }
 
@@ -65,8 +65,7 @@ public class XRayHeuristic implements Listener {
         Deque<Long> timestamps = playerOreMinedTimestamps.computeIfAbsent(player.getUniqueId(), k -> new ConcurrentLinkedDeque<>());
         timestamps.addLast(now);
 
-        // Remove timestamps outside sliding window
-        while (!timestamps.isEmpty() && (now - timestamps.peekFirst()) > windowMillis) {
+while (!timestamps.isEmpty() && (now - timestamps.peekFirst()) > windowMillis) {
             timestamps.pollFirst();
         }
 
@@ -74,14 +73,14 @@ public class XRayHeuristic implements Listener {
         int threshold = plugin.getConfigManager().getXRayThreshold();
 
         if (count >= threshold) {
-            // Trigger alarm
+            
             Location loc = block.getLocation();
             int ping = player.getPing();
             String detail = String.format("Son %d saniyede %d değerli maden kırıldı! Eşik: %d/dk. Konum: [%s, X:%.0f Y:%d Z:%.0f] Ping: %dms",
                     windowSec, count, threshold, worldName, loc.getX(), y, loc.getZ(), ping);
 
             alarmDispatcher.dispatchAlarm("X-Ray Sezgisel Tespiti", player.getName(), detail);
-            timestamps.clear(); // Reset to prevent alarm flood
+            timestamps.clear(); 
         }
     }
 }

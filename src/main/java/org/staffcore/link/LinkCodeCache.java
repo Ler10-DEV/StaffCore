@@ -25,7 +25,7 @@ public class LinkCodeCache {
     }
 
     public synchronized String generateCode(UUID uuid) {
-        // Clear any previous code for this player
+        
         String existingCode = playerMap.remove(uuid);
         if (existingCode != null) {
             codeMap.remove(existingCode);

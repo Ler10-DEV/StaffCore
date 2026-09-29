@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Data Access Object for staff scoring and append-only audit trail.
- */
 public interface StaffScoreDAO {
     Optional<ScoreRecord> findByStaffUuid(UUID staffUuid);
     Collection<ScoreRecord> getAll();

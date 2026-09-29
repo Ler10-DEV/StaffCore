@@ -3,19 +3,16 @@ package org.staffcore.storage.model;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * Represents a punishment with evidence verification support.
- */
 public class Punishment {
-    private final String id; // Format: #CZ-XXXX or CZ-XXXX
+    private final String id; 
     private final UUID targetUuid;
     private final String targetName;
     private final UUID staffUuid;
     private final String staffName;
     private final String reason;
-    private final String type; // BAN, MUTE, KICK, JAIL, etc.
+    private final String type; 
     private final long timestamp;
-    private final long durationMillis; // -1 for permanent
+    private final long durationMillis; 
     private PunishmentStatus status;
     private String proofUrl;
     private String reviewNote;

@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Data Access Object for Kont (forensic inspection) history.
- * Implements rolling retention (e.g. keeping the last 1000 records).
- */
 public interface KontRecordDAO {
     void addRecord(KontRecord record);
     List<KontRecord> getRecentRecords(int limit);

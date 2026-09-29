@@ -44,8 +44,7 @@ public class ModuleLoader {
     public void loadAll() {
         logger.info("Initializing StaffCore modules...");
 
-        // 1. Core Services
-        plugin.setStaffFlagService(new StaffFlagService(plugin));
+plugin.setStaffFlagService(new StaffFlagService(plugin));
         plugin.setAccountLinkService(new AccountLinkService(plugin));
         plugin.setScoreEngine(new ScoreEngine(plugin));
         plugin.setRoleAssigner(new RoleAssigner(plugin));
@@ -60,8 +59,7 @@ public class ModuleLoader {
         plugin.setXRayHeuristic(new XRayHeuristic(plugin, alarmDispatcher));
         plugin.setCommandLogger(new CommandLogger(plugin));
 
-        // 2. Register Events
-        PluginManager pm = Bukkit.getPluginManager();
+PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(plugin.getStaffGatekeeper(), plugin);
         pm.registerEvents(plugin.getReportTicketService(), plugin);
         pm.registerEvents(plugin.getCsatListener(), plugin);
@@ -71,8 +69,7 @@ public class ModuleLoader {
         pm.registerEvents(plugin.getChatWatchdog(), plugin);
         pm.registerEvents(plugin.getXRayHeuristic(), plugin);
 
-        // 3. Register Commands
-        registerCommand("hesap-eşle", new LinkCommand(plugin));
+registerCommand("hesap-eşle", new LinkCommand(plugin));
         registerCommand("rapor", new ReportCommand(plugin));
         registerCommand("komutlog", new CommandLogCommand(plugin));
         registerCommand("ceza", new PunishCommand(plugin));
@@ -87,8 +84,7 @@ public class ModuleLoader {
             scCmd.setTabCompleter(adminCmd);
         }
 
-        // 4. Background Scheduled Tasks
-        schedulePeriodicTasks();
+schedulePeriodicTasks();
 
         logger.info("All StaffCore modules successfully loaded.");
     }
@@ -106,21 +102,17 @@ public class ModuleLoader {
     private void schedulePeriodicTasks() {
         int flushSec = plugin.getConfigManager().getFlushIntervalSeconds();
 
-        // Periodic JSON flush
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             plugin.getStorageProvider().flush();
         }, flushSec * 20L, flushSec * 20L);
 
-        // Link Code TTL cleanup
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             plugin.getAccountLinkService().getCodeCache().cleanupExpired();
-        }, 600L, 600L); // every 30s
+        }, 600L, 600L); 
 
-        // Proof reminder task (every 5 mins)
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new ProofReminderTask(plugin), 6000L, 6000L);
+Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new ProofReminderTask(plugin), 6000L, 6000L);
 
-        // Automated Backup Schedule
-        if (plugin.getConfigManager().isBackupEnabled()) {
+if (plugin.getConfigManager().isBackupEnabled()) {
             int hours = plugin.getConfigManager().getBackupIntervalHours();
             plugin.getDiscordBot().getAsyncExecutor().scheduleAtFixedRate(() -> {
                 if (plugin.getStorageProvider() instanceof JsonStorageProvider jsonProv) {
@@ -133,8 +125,7 @@ public class ModuleLoader {
             }, hours, hours, TimeUnit.HOURS);
         }
 
-        // Weekly Leaderboard Task (Sunday reset)
-        plugin.getDiscordBot().getAsyncExecutor().scheduleAtFixedRate(
+plugin.getDiscordBot().getAsyncExecutor().scheduleAtFixedRate(
                 new WeeklyLeaderboardTask(plugin), 1, 7, TimeUnit.DAYS
         );
     }

@@ -75,16 +75,13 @@ public class KontManager {
         int durationSec = plugin.getConfigManager().getKontDurationSeconds();
         Location targetLoc = target.getLocation();
 
-        // Start freeze task
-        KontFreezeTask freezeTask = new KontFreezeTask(plugin, target.getUniqueId(), targetLoc, durationSec);
+KontFreezeTask freezeTask = new KontFreezeTask(plugin, target.getUniqueId(), targetLoc, durationSec);
         freezeTask.runTaskTimer(plugin, 0L, 20L);
 
-        // Find linked Discord account if any
-        Optional<LinkRecord> targetLink = plugin.getStorageProvider().linkedAccounts().findByUuid(target.getUniqueId());
+Optional<LinkRecord> targetLink = plugin.getStorageProvider().linkedAccounts().findByUuid(target.getUniqueId());
         String targetDiscordId = targetLink.map(LinkRecord::getDiscordId).orElse(null);
 
-        // Create temporary Discord channels
-        KontDiscordRooms.ActiveRooms rooms = discordRooms.createRooms(staff.getName(), target.getName(), targetDiscordId);
+KontDiscordRooms.ActiveRooms rooms = discordRooms.createRooms(staff.getName(), target.getName(), targetDiscordId);
 
         ActiveKontSession session = new ActiveKontSession(
                 target.getUniqueId(),
@@ -97,8 +94,7 @@ public class KontManager {
         );
         activeSessions.put(target.getUniqueId(), session);
 
-        // Log to Discord channel
-        var channel = plugin.getChannelRegistry().get("kont_log");
+var channel = plugin.getChannelRegistry().get("kont_log");
         if (channel != null) {
             channel.sendMessageEmbeds(EmbedFactory.createKontStartEmbed(staff.getName(), target.getName(), durationSec)).queue();
         }
@@ -149,8 +145,7 @@ public class KontManager {
         plugin.getStorageProvider().kontRecords().addRecord(record);
         plugin.getStorageProvider().flush();
 
-        // Process outcomes
-        switch (outcome.toLowerCase()) {
+switch (outcome.toLowerCase()) {
             case "temiz":
             case "clean":
                 if (target != null && target.isOnline()) {
@@ -158,7 +153,7 @@ public class KontManager {
                     target.setFlySpeed(0.1f);
                     target.clearTitle();
                     target.sendMessage(plugin.getLocaleManager().getPrefixed("kont.finished_clean", "&aKontrol tamamlandı, temiz çıktınız! Sabrınız için teşekkürler.", null));
-                    // Compensation reward (e.g. 5 diamonds)
+                    
                     target.getInventory().addItem(new ItemStack(Material.DIAMOND, 5));
                 }
                 plugin.getScoreEngine().awardScore(session.getStaffUuid(), session.getStaffName(), "kont_clean", "Kontrol temiz tamamlandı: " + session.getTargetName());
@@ -178,7 +173,7 @@ public class KontManager {
 
             case "itiraf":
             case "confession":
-                // Discounted ban: 15 days
+                
                 long fifteenDaysMillis = 15L * 24 * 60 * 60 * 1000;
                 plugin.getPunishmentService().issuePunishment(
                         Bukkit.getOfflinePlayer(session.getTargetUuid()),
@@ -191,11 +186,9 @@ public class KontManager {
                 break;
         }
 
-        // Schedule Discord rooms deletion after 60s
-        discordRooms.scheduleCleanup(session.getDiscordRooms(), 60);
+discordRooms.scheduleCleanup(session.getDiscordRooms(), 60);
 
-        // Discord log
-        var channel = plugin.getChannelRegistry().get("kont_log");
+var channel = plugin.getChannelRegistry().get("kont_log");
         if (channel != null) {
             channel.sendMessageEmbeds(EmbedFactory.createKontEndEmbed(record)).queue();
         }
@@ -224,8 +217,7 @@ public class KontManager {
         plugin.getStorageProvider().kontRecords().addRecord(record);
         plugin.getStorageProvider().flush();
 
-        // Issue permanent ban
-        plugin.getPunishmentService().issuePunishment(
+plugin.getPunishmentService().issuePunishment(
                 player,
                 Bukkit.getPlayer(session.getStaffUuid()),
                 "Kontrol Sırasında Çıkış Yapıldı (Hile İtirafı / Combat-Quit)",

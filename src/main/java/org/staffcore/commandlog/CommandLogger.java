@@ -34,8 +34,7 @@ public class CommandLogger implements Listener {
         CommandEntry entry = new CommandEntry(masked, System.currentTimeMillis(), locStr);
         plugin.getStorageProvider().commandLogs().logCommand(player.getUniqueId(), entry);
 
-        // Stream to Discord via rate limit guard
-        var channel = plugin.getChannelRegistry().get("komut_log");
+var channel = plugin.getChannelRegistry().get("komut_log");
         if (channel != null && plugin.getDiscordBot().getRateLimitGuard() != null) {
             String logMsg = String.format("`[%s]` **%s**: `%s` *(%s)*",
                     Instant.now().toString().substring(11, 19), player.getName(), masked, locStr);

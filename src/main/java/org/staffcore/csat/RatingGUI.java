@@ -23,7 +23,7 @@ import java.util.List;
 public class RatingGUI implements InventoryHolder, Listener {
     private final StaffCorePlugin plugin;
     private final String staffName;
-    private final Integer ticketId; // nullable for direct rating
+    private final Integer ticketId; 
     private final NamespacedKey starKey;
     private Inventory inventory;
 
@@ -41,14 +41,12 @@ public class RatingGUI implements InventoryHolder, Listener {
 
         this.inventory = Bukkit.createInventory(this, 27, Component.text(titleText, NamedTextColor.DARK_BLUE));
 
-        // Fill background with gray glass panes
-        ItemStack bg = createGuiItem(Material.GRAY_STAINED_GLASS_PANE, Component.text(" "), null, -1);
+ItemStack bg = createGuiItem(Material.GRAY_STAINED_GLASS_PANE, Component.text(" "), null, -1);
         for (int i = 0; i < 27; i++) {
             inventory.setItem(i, bg);
         }
 
-        // Slot 4: Info Header
-        inventory.setItem(4, createGuiItem(Material.WRITABLE_BOOK,
+inventory.setItem(4, createGuiItem(Material.WRITABLE_BOOK,
                 Component.text("⭐ Hizmet Değerlendirmesi", NamedTextColor.GOLD, TextDecoration.BOLD),
                 List.of(
                         Component.text("Yetkili: ", NamedTextColor.GRAY).append(Component.text(staffName != null ? staffName : "Genel", NamedTextColor.AQUA)),
@@ -58,8 +56,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("yıldızı aşağıdaki menüden seçiniz.", NamedTextColor.YELLOW)
                 ), -1));
 
-        // Slot 11: 1 Star - Very Bad
-        inventory.setItem(11, createGuiItem(Material.RED_CONCRETE,
+inventory.setItem(11, createGuiItem(Material.RED_CONCRETE,
                 Component.text("★☆☆☆☆ (1 Yıldız)", NamedTextColor.RED, TextDecoration.BOLD),
                 List.of(
                         Component.text("Derece: ", NamedTextColor.GRAY).append(Component.text("Çok Kötü", NamedTextColor.RED)),
@@ -68,8 +65,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("» Oylamak için tıkla!", NamedTextColor.YELLOW)
                 ), 1));
 
-        // Slot 12: 2 Stars - Bad
-        inventory.setItem(12, createGuiItem(Material.ORANGE_CONCRETE,
+inventory.setItem(12, createGuiItem(Material.ORANGE_CONCRETE,
                 Component.text("★★☆☆☆ (2 Yıldız)", NamedTextColor.GOLD, TextDecoration.BOLD),
                 List.of(
                         Component.text("Derece: ", NamedTextColor.GRAY).append(Component.text("Yetersiz / Kötü", NamedTextColor.GOLD)),
@@ -78,8 +74,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("» Oylamak için tıkla!", NamedTextColor.YELLOW)
                 ), 2));
 
-        // Slot 13: 3 Stars - Average
-        inventory.setItem(13, createGuiItem(Material.YELLOW_CONCRETE,
+inventory.setItem(13, createGuiItem(Material.YELLOW_CONCRETE,
                 Component.text("★★★☆☆ (3 Yıldız)", NamedTextColor.YELLOW, TextDecoration.BOLD),
                 List.of(
                         Component.text("Derece: ", NamedTextColor.GRAY).append(Component.text("Orta / Standart", NamedTextColor.YELLOW)),
@@ -88,8 +83,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("» Oylamak için tıkla!", NamedTextColor.YELLOW)
                 ), 3));
 
-        // Slot 14: 4 Stars - Good
-        inventory.setItem(14, createGuiItem(Material.LIME_CONCRETE,
+inventory.setItem(14, createGuiItem(Material.LIME_CONCRETE,
                 Component.text("★★★★☆ (4 Yıldız)", NamedTextColor.GREEN, TextDecoration.BOLD),
                 List.of(
                         Component.text("Derece: ", NamedTextColor.GRAY).append(Component.text("İyi & İlgili", NamedTextColor.GREEN)),
@@ -98,8 +92,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("» Oylamak için tıkla!", NamedTextColor.YELLOW)
                 ), 4));
 
-        // Slot 15: 5 Stars - Excellent
-        inventory.setItem(15, createGuiItem(Material.EMERALD,
+inventory.setItem(15, createGuiItem(Material.EMERALD,
                 Component.text("★★★★★ (5 Yıldız)", NamedTextColor.AQUA, TextDecoration.BOLD),
                 List.of(
                         Component.text("Derece: ", NamedTextColor.GRAY).append(Component.text("Mükemmel & Kusursuz", NamedTextColor.AQUA)),
@@ -108,8 +101,7 @@ public class RatingGUI implements InventoryHolder, Listener {
                         Component.text("» Oylamak için tıkla!", NamedTextColor.YELLOW)
                 ), 5));
 
-        // Slot 22: Cancel
-        inventory.setItem(22, createGuiItem(Material.BARRIER,
+inventory.setItem(22, createGuiItem(Material.BARRIER,
                 Component.text("İptal Et & Kapat", NamedTextColor.DARK_RED, TextDecoration.BOLD),
                 List.of(Component.text("Puanlama yapmadan pencereyi kapatır.", NamedTextColor.GRAY)), 0));
 

@@ -45,8 +45,7 @@ public class DiscordEventListener extends ListenerAdapter {
             String discordId = event.getUser().getId();
             String discordTag = event.getUser().getName();
 
-            // Check if discord ID already linked to someone else
-            Optional<LinkRecord> existingDiscord = plugin.getStorageProvider().linkedAccounts().findByDiscordId(discordId);
+Optional<LinkRecord> existingDiscord = plugin.getStorageProvider().linkedAccounts().findByDiscordId(discordId);
             if (existingDiscord.isPresent() && !existingDiscord.get().getUuid().equals(uuid)) {
                 event.reply("❌ Bu Discord hesabı zaten başka bir Minecraft hesabına bağlı!").setEphemeral(true).queue();
                 return;
@@ -100,14 +99,13 @@ public class DiscordEventListener extends ListenerAdapter {
                 event.reply("İşlem gerçekleştirilemedi: " + e.getMessage()).setEphemeral(true).queue();
             }
         } else if (customId.startsWith("proof:add:")) {
-            // Format: proof:add:{punishment_id}:{staff_uuid}
+            
             String[] parts = customId.split(":");
             if (parts.length >= 4) {
                 String punishmentId = parts[2];
                 String staffUuidStr = parts[3];
 
-                // Permission lock: check if user matches staff link
-                try {
+try {
                     UUID staffUuid = UUID.fromString(staffUuidStr);
                     Optional<LinkRecord> link = plugin.getStorageProvider().linkedAccounts().findByUuid(staffUuid);
                     if (link.isPresent() && !link.get().getDiscordId().equals(event.getUser().getId())) {
@@ -155,15 +153,13 @@ public class DiscordEventListener extends ListenerAdapter {
                 plugin.getStorageProvider().punishments().save(p);
                 plugin.getStorageProvider().flush();
 
-                // Award score to staff
-                if (p.getStaffUuid() != null) {
+if (p.getStaffUuid() != null) {
                     plugin.getScoreEngine().awardScore(p.getStaffUuid(), p.getStaffName(), "punishment_verified", "Ceza " + p.getId() + " kanıtı doğrulandı");
                 }
 
                 event.reply("✅ Ceza (**" + punishmentId + "**) için kanıt başarıyla kaydedildi ve onaylandı!").setEphemeral(true).queue();
 
-                // Update channel embed if possible
-                var channel = plugin.getChannelRegistry().get("ceza_log");
+var channel = plugin.getChannelRegistry().get("ceza_log");
                 if (channel != null) {
                     channel.sendMessageEmbeds(EmbedFactory.createPunishmentEmbed(p)).queue();
                 }

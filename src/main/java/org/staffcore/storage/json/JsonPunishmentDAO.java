@@ -29,7 +29,7 @@ public class JsonPunishmentDAO implements PunishmentDAO {
                 sequence.set(Integer.parseInt(lastSeqStr));
             } catch (NumberFormatException ignored) {}
         } else {
-            // Find highest from existing punishments
+            
             int max = 1000;
             for (Punishment p : store.values()) {
                 String id = p.getId();
@@ -58,7 +58,7 @@ public class JsonPunishmentDAO implements PunishmentDAO {
         String normalized = id.startsWith("#") ? id : "#" + id;
         Punishment p = store.get(normalized);
         if (p == null) {
-            // Fallback check without #
+            
             p = store.get(id);
         }
         return Optional.ofNullable(p);

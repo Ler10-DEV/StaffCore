@@ -56,8 +56,7 @@ public class DiscordBot {
 
             jda.awaitReady();
 
-            // Register Slash Commands
-            jda.updateCommands().addCommands(
+jda.updateCommands().addCommands(
                     Commands.slash("esle", "Minecraft hesabınızı eşleyin")
                             .addOption(OptionType.STRING, "kod", "Oyun içinden aldığınız 4 haneli kod (MC-XXXX)", true)
             ).queue();

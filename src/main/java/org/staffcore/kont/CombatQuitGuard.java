@@ -50,7 +50,7 @@ public class CombatQuitGuard implements Listener {
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         if (plugin.getKontManager().isInKont(player.getUniqueId())) {
-            // Isolate chat to staff members and log to Discord
+            
             event.setCancelled(true);
             String format = "§8[§cKONT-CHAT§8] §e" + player.getName() + ": §f" + event.getMessage();
             Bukkit.getOnlinePlayers().stream()
@@ -69,7 +69,7 @@ public class CombatQuitGuard implements Listener {
     public void onCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         if (plugin.getKontManager().isInKont(player.getUniqueId())) {
-            // Block commands during kont except /msg or specific whitelist
+            
             if (!event.getMessage().startsWith("/kont") && !event.getMessage().startsWith("/r ")) {
                 event.setCancelled(true);
                 player.sendMessage("§cKontrol altındayken komut kullanamazsınız!");

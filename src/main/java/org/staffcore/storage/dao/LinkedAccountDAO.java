@@ -6,9 +6,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Data Access Object for player-to-Discord linked accounts.
- */
 public interface LinkedAccountDAO {
     Optional<LinkRecord> findByUuid(UUID uuid);
     Optional<LinkRecord> findByDiscordId(String discordId);

@@ -2,9 +2,6 @@ package org.staffcore.storage.model;
 
 import java.util.UUID;
 
-/**
- * Represents the cumulative score and activity metrics of a staff member.
- */
 public class ScoreRecord {
     private final UUID staffUuid;
     private final String staffName;

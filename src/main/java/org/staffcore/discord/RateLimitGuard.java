@@ -6,9 +6,6 @@ import java.util.Queue;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
 
-/**
- * Batches and queues Discord log messages to prevent Discord API rate limiting.
- */
 public class RateLimitGuard {
     private final ScheduledExecutorService scheduler;
     private final BlockingQueue<LogTask> queue = new LinkedBlockingQueue<>(500);
@@ -31,7 +28,7 @@ public class RateLimitGuard {
         if (scheduledTask != null) {
             scheduledTask.cancel(false);
         }
-        processBatch(); // Flush remainder
+        processBatch(); 
     }
 
     public void queueMessage(TextChannel channel, String message) {

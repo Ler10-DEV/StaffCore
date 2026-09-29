@@ -49,14 +49,12 @@ public class WeeklyLeaderboardTask implements Runnable {
                 channel.sendMessageEmbeds(eb.build()).queue();
             }
 
-            // Assign Haftanın Yetkilisi role to #1
-            ScoreRecord winner = leaders.get(0);
+ScoreRecord winner = leaders.get(0);
             if (winner.getWeeklyScore() > 0) {
                 plugin.getRoleAssigner().assignStaffOfTheWeek(winner.getStaffUuid());
             }
 
-            // Reset weekly scores
-            plugin.getStorageProvider().staffScores().resetWeeklyScores();
+plugin.getStorageProvider().staffScores().resetWeeklyScores();
             plugin.getStorageProvider().flush();
             logger.info("Weekly leaderboard published and weekly scores reset.");
         } catch (Exception e) {

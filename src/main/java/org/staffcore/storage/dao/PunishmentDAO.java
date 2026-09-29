@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Data Access Object for punishments and proof tracking.
- */
 public interface PunishmentDAO {
     Optional<Punishment> findById(String id);
     Collection<Punishment> getAll();

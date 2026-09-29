@@ -15,7 +15,7 @@ public class AlarmDispatcher {
     }
 
     public void dispatchAlarm(String type, String playerName, String detail) {
-        // In-game staff broadcast
+        
         Component alert = Component.text("⚠️ [GÜVENLİK ALARMI] ", NamedTextColor.RED)
                 .append(Component.text(type + " - ", NamedTextColor.GOLD))
                 .append(Component.text(playerName, NamedTextColor.YELLOW))
@@ -27,8 +27,7 @@ public class AlarmDispatcher {
             }
         }
 
-        // Discord embed
-        var channel = plugin.getChannelRegistry().get("guvenlik_alarmlari");
+var channel = plugin.getChannelRegistry().get("guvenlik_alarmlari");
         if (channel != null) {
             channel.sendMessageEmbeds(EmbedFactory.createSecurityAlarmEmbed(type, playerName, detail)).queue();
         }

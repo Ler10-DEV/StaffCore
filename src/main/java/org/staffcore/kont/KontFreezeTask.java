@@ -42,8 +42,7 @@ public class KontFreezeTask extends BukkitRunnable {
 
         remainingSeconds--;
 
-        // Keep player frozen at location
-        if (player.getLocation().distanceSquared(freezeLoc) > 0.5) {
+if (player.getLocation().distanceSquared(freezeLoc) > 0.5) {
             player.teleport(freezeLoc);
         }
 
@@ -51,8 +50,7 @@ public class KontFreezeTask extends BukkitRunnable {
         player.setFlySpeed(0f);
         player.setAllowFlight(false);
 
-        // Update Title & ActionBar every second
-        Title title = Title.title(
+Title title = Title.title(
                 Component.text("⚠️ KONTROLE ALINDINIZ ⚠️", NamedTextColor.RED),
                 Component.text("Discord sesli odasına bağlanın ve ekrandan ayrılmayın!", NamedTextColor.YELLOW),
                 Title.Times.times(Duration.ofMillis(100), Duration.ofSeconds(2), Duration.ofMillis(500))

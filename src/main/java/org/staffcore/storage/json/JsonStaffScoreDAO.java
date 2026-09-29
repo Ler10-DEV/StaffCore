@@ -90,8 +90,7 @@ public class JsonStaffScoreDAO implements StaffScoreDAO {
         if (event == null) return;
         recentEvents.add(event);
 
-        // Append to score_events.jsonl
-        try {
+try {
             if (auditFile.getParent() != null) Files.createDirectories(auditFile.getParent());
             String jsonLine = gson.toJson(event) + "\n";
             Files.writeString(auditFile, jsonLine, StandardCharsets.UTF_8,

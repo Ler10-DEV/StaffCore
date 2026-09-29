@@ -40,13 +40,11 @@ public class RoleAssigner {
             }
         }
 
-        // Remove role from all other members
-        for (Member m : guild.getMembersWithRoles(role)) {
+for (Member m : guild.getMembersWithRoles(role)) {
             guild.removeRoleFromMember(m, role).queue();
         }
 
-        // Add to winner
-        Member targetMember = guild.getMemberById(link.get().getDiscordId());
+Member targetMember = guild.getMemberById(link.get().getDiscordId());
         if (targetMember != null && role != null) {
             guild.addRoleToMember(targetMember, role).queue();
             logger.info("Assigned 'Haftanın Yetkilisi' role to " + targetMember.getEffectiveName());

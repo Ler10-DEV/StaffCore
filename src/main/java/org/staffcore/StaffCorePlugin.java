@@ -63,12 +63,10 @@ public class StaffCorePlugin extends JavaPlugin {
         getLogger().info("    PaperMC 1.20.4+ | JSON Engine | JDA 5");
         getLogger().info("==================================================");
 
-        // 1. Config & Locale
-        this.configManager = new ConfigManager(this);
+this.configManager = new ConfigManager(this);
         this.localeManager = new LocaleManager(this);
 
-        // 2. Initialize Pluggable Storage Engine
-        try {
+try {
             Path dataDir = configManager.getDataDir();
             Path backupDir = configManager.getBackupDir();
             this.storageProvider = StorageFactory.createProvider(
@@ -85,15 +83,12 @@ public class StaffCorePlugin extends JavaPlugin {
             return;
         }
 
-        // 3. Initialize Discord Bot
-        this.discordBot = new DiscordBot(this);
+this.discordBot = new DiscordBot(this);
         this.discordBot.start();
 
-        // 4. Gatekeeper (2FA)
-        this.staffGatekeeper = new StaffGatekeeper(this);
+this.staffGatekeeper = new StaffGatekeeper(this);
 
-        // 5. Load Modules
-        this.moduleLoader = new ModuleLoader(this);
+this.moduleLoader = new ModuleLoader(this);
         this.moduleLoader.loadAll();
 
         this.shutdownHook = new ShutdownHook(this);

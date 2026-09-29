@@ -1,8 +1,5 @@
 package org.staffcore.storage.model;
 
-/**
- * Represents a logged command executed by a player.
- */
 public class CommandEntry {
     private final String command;
     private final long timestamp;

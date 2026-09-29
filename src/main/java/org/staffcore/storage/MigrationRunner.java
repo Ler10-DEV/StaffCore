@@ -10,9 +10,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * Handles database schema versioning and data migration between storage backends (e.g. JSON -> MySQL/PostgreSQL/H2/Redis).
- */
 public class MigrationRunner {
     private final StorageProvider sourceProvider;
     private final Logger logger;
@@ -25,15 +22,7 @@ public class MigrationRunner {
         this.logger = logger;
     }
 
-    /**
-     * Executes migration from source provider to target provider.
-     *
-     * @param targetProvider The initialized target storage provider
-     * @param dryRun If true, only calculates records without modifying target or archiving source
-     * @param sourceDataDir Optional Path to source data directory to archive if JSON
-     * @return MigrationReport summary
-     */
-    public MigrationReport migrate(StorageProvider targetProvider, boolean dryRun, Path sourceDataDir) throws Exception {
+public MigrationReport migrate(StorageProvider targetProvider, boolean dryRun, Path sourceDataDir) throws Exception {
         Collection<LinkRecord> links = sourceProvider.linkedAccounts().getAll();
         Collection<Punishment> punishments = sourceProvider.punishments().getAll();
         List<KontRecord> konts = sourceProvider.kontRecords().getRecentRecords(10000);
@@ -54,11 +43,9 @@ public class MigrationRunner {
 
         logger.info("Starting migration of " + total + " records to " + targetProvider.getType() + "...");
 
-        // Initialize target provider before inserting data
-        targetProvider.initialize();
+targetProvider.initialize();
 
-        // Insert into target DAOs
-        for (LinkRecord link : links) {
+for (LinkRecord link : links) {
             targetProvider.linkedAccounts().save(link);
         }
         for (Punishment p : punishments) {
@@ -73,8 +60,7 @@ public class MigrationRunner {
 
         targetProvider.flush();
 
-        // Archive source directory if it's JSON
-        if (sourceDataDir != null && Files.exists(sourceDataDir)) {
+if (sourceDataDir != null && Files.exists(sourceDataDir)) {
             String timestamp = LocalDateTime.now().format(FORMATTER);
             Path archiveDir = sourceDataDir.resolveSibling("_migrated_" + timestamp);
             Files.createDirectories(archiveDir);

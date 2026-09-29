@@ -18,8 +18,7 @@ public class ShutdownHook {
     public void executeShutdown() {
         logger.info("Executing graceful shutdown for StaffCore...");
 
-        // 1. Force flush storage
-        if (plugin.getStorageProvider() != null) {
+if (plugin.getStorageProvider() != null) {
             plugin.getStorageProvider().flush();
             if (plugin.getStorageProvider() instanceof JsonStorageProvider jsonProv) {
                 try {
@@ -31,13 +30,11 @@ public class ShutdownHook {
             plugin.getStorageProvider().shutdown();
         }
 
-        // 2. Disconnect Discord bot
-        if (plugin.getDiscordBot() != null) {
+if (plugin.getDiscordBot() != null) {
             plugin.getDiscordBot().stop();
         }
 
-        // 3. Cancel tasks
-        Bukkit.getScheduler().cancelTasks(plugin);
+Bukkit.getScheduler().cancelTasks(plugin);
 
         logger.info("StaffCore shutdown completed.");
     }

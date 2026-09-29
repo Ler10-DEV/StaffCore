@@ -5,17 +5,6 @@ import org.staffcore.storage.StorageProvider;
 import org.staffcore.storage.StorageType;
 import org.staffcore.storage.dao.*;
 
-/**
- * ==============================================================================
- * REDIS STORAGE PROVIDER (PLUGGABLE DRIVER STUB)
- * ==============================================================================
- * To implement Redis backend for multi-server / BungeeCord / Velocity networks:
- * 1. Add Jedis or Lettuce dependency in pom.xml.
- * 2. Implement the 5 DAO interfaces (LinkedAccountDAO, PunishmentDAO, KontRecordDAO,
- *    StaffScoreDAO, CommandLogDAO) using Redis Hashes, PubSub, and Sorted Sets.
- * 3. Update initialize() to connect using pool settings from config.yml.
- * 4. See docs in README.md under "Database Migration & Storage Providers".
- */
 public class RedisStorageProvider implements StorageProvider {
 
     @Override

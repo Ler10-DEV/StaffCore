@@ -75,11 +75,10 @@ public class RatingHandler {
                 return false;
             }
 
-            // Cooldown check (e.g. 15 minutes per staff)
-            String cooldownKey = player.getUniqueId() + ":" + staffName.toLowerCase();
+String cooldownKey = player.getUniqueId() + ":" + staffName.toLowerCase();
             Long lastTime = directRateCooldowns.get(cooldownKey);
             long now = System.currentTimeMillis();
-            long cooldownMillis = 15 * 60 * 1000L; // 15 mins
+            long cooldownMillis = 15 * 60 * 1000L; 
 
             if (lastTime != null && (now - lastTime) < cooldownMillis) {
                 long remainingMins = ((lastTime + cooldownMillis) - now) / 60000L + 1;
@@ -109,8 +108,7 @@ public class RatingHandler {
         String starSymbols = "★".repeat(stars) + "☆".repeat(5 - stars);
         String playerName = player != null ? player.getName() : "CONSOLE";
 
-        // Feedback sound & message to player
-        if (player != null) {
+if (player != null) {
             if (stars >= 4) {
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1.2f);
             } else {
@@ -123,15 +121,13 @@ public class RatingHandler {
             }
         }
 
-        // Notify staff if online
-        Player onlineStaff = Bukkit.getPlayer(staffUuid);
+Player onlineStaff = Bukkit.getPlayer(staffUuid);
         if (onlineStaff != null && onlineStaff.isOnline()) {
             onlineStaff.sendMessage(String.format("§b[StaffCore] §7Bir oyuncu (%s) size §e%s §7puan verdi! (Güncel Skorunuz: §e%d§7)",
                     playerName, starSymbols, scoreRecord.getTotalScore()));
         }
 
-        // Discord Notification
-        try {
+try {
             var channel = plugin.getChannelRegistry().get("haftalik_karne");
             if (channel == null) channel = plugin.getChannelRegistry().get("raporlar");
             if (channel != null) {

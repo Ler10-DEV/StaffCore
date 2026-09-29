@@ -5,16 +5,6 @@ import org.staffcore.storage.StorageProvider;
 import org.staffcore.storage.StorageType;
 import org.staffcore.storage.dao.*;
 
-/**
- * ==============================================================================
- * H2 DATABASE STORAGE PROVIDER (PLUGGABLE DRIVER STUB)
- * ==============================================================================
- * To implement embedded H2 SQL database:
- * 1. Add com.h2database:h2 dependency to pom.xml.
- * 2. Create JDBC schema and implement DAO interfaces with HikariCP pool.
- * 3. Switch `storage.type: h2` in config.yml.
- * 4. See docs in README.md.
- */
 public class H2StorageProvider implements StorageProvider {
 
     @Override

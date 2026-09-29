@@ -2,9 +2,6 @@ package org.staffcore.storage.model;
 
 import java.util.UUID;
 
-/**
- * Represents an individual score change event logged to score_events.jsonl.
- */
 public class ScoreEvent {
     private final String eventId;
     private final UUID staffUuid;

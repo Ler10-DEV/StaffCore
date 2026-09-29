@@ -29,8 +29,7 @@ public class ConfigManager {
         return secretsManager;
     }
 
-    // Storage Settings
-    public StorageType getStorageType() {
+public StorageType getStorageType() {
         String typeStr = config.getString("storage.type", "json");
         return StorageType.fromString(typeStr);
     }
@@ -52,7 +51,7 @@ public class ConfigManager {
     }
 
     public Path getDataDir() {
-        // Allow environment variable override for test isolation
+        
         String envDir = System.getenv("STAFFCORE_DATA_DIR");
         String configuredDir = config.getString("storage.json.data_dir", "data");
         String finalDir = (envDir != null && !envDir.trim().isEmpty()) ? envDir : configuredDir;
@@ -68,8 +67,7 @@ public class ConfigManager {
         return config.getBoolean("storage.json.pretty_print", false);
     }
 
-    // Discord Settings
-    public boolean isDiscordEnabled() {
+public boolean isDiscordEnabled() {
         return config.getBoolean("discord.enabled", true);
     }
 
@@ -85,8 +83,7 @@ public class ConfigManager {
         return config.getString("discord.channels." + key, "auto");
     }
 
-    // Auth & 2FA Settings
-    public boolean isTwoFactorEnabled() {
+public boolean isTwoFactorEnabled() {
         return config.getBoolean("auth.two_factor_enabled", true);
     }
 
@@ -94,13 +91,11 @@ public class ConfigManager {
         return config.getInt("auth.timeout_seconds", 60);
     }
 
-    // Report Settings
-    public int getConfigManagerReportCooldown() {
+public int getConfigManagerReportCooldown() {
         return config.getInt("report.cooldown_seconds", 60);
     }
 
-    // Link Settings
-    public int getLinkCodeTtlSeconds() {
+public int getLinkCodeTtlSeconds() {
         return config.getInt("link.code_ttl_seconds", 300);
     }
 
@@ -108,8 +103,7 @@ public class ConfigManager {
         return config.getString("link.code_prefix", "MC-");
     }
 
-    // Kont Settings
-    public int getKontDurationSeconds() {
+public int getKontDurationSeconds() {
         return config.getInt("kont.duration_seconds", 300);
     }
 
@@ -121,8 +115,7 @@ public class ConfigManager {
         return config.getBoolean("kont.combat_quit_ban", true);
     }
 
-    // Heuristics
-    public boolean isXRayEnabled() {
+public boolean isXRayEnabled() {
         return config.getBoolean("heuristic.xray.enabled", true);
     }
 
@@ -158,8 +151,7 @@ public class ConfigManager {
         return config.getStringList("command_logger.mask_patterns");
     }
 
-    // Score
-    public int getBaseScore() {
+public int getBaseScore() {
         return config.getInt("score.base_score", 100);
     }
 

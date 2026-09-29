@@ -15,11 +15,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Generic, thread-safe, memory-cached, atomic-persisted JSON file store.
- *
- * @param <T> The stored item value type
- */
 public class JsonStore<T> {
     private final Path file;
     private final Gson gson;
@@ -36,47 +31,29 @@ public class JsonStore<T> {
         this.logger = logger;
     }
 
-    /**
-     * Reads an item from in-memory RAM cache in O(1) time.
-     */
-    public T get(String key) {
+public T get(String key) {
         return cache.get(key);
     }
 
-    /**
-     * Returns an immutable copy of all cached values.
-     */
-    public Collection<T> values() {
+public Collection<T> values() {
         return List.copyOf(cache.values());
     }
 
-    /**
-     * Returns an immutable copy of all cached entries.
-     */
-    public Map<String, T> asMap() {
+public Map<String, T> asMap() {
         return Map.copyOf(cache);
     }
 
-    /**
-     * Writes an item to in-memory RAM cache and marks dirty for flushing.
-     */
-    public void put(String key, T value) {
+public void put(String key, T value) {
         cache.put(key, value);
         dirty = true;
     }
 
-    /**
-     * Removes an item from in-memory RAM cache and marks dirty.
-     */
-    public void remove(String key) {
+public void remove(String key) {
         cache.remove(key);
         dirty = true;
     }
 
-    /**
-     * Clears all entries from RAM cache and marks dirty.
-     */
-    public void clear() {
+public void clear() {
         cache.clear();
         dirty = true;
     }
@@ -85,11 +62,7 @@ public class JsonStore<T> {
         return dirty;
     }
 
-    /**
-     * Atomically flushes in-memory cache to disk if dirty.
-     * Uses .tmp file and Atomic Move. If corrupt or failed, preserves original file.
-     */
-    public void flush() {
+public void flush() {
         if (!dirty) return;
         lock.writeLock().lock();
         try {
@@ -118,11 +91,7 @@ public class JsonStore<T> {
         }
     }
 
-    /**
-     * Loads JSON data into memory on initialization.
-     * If file is corrupt, backs it up to .corrupt-{ts} and starts with empty cache.
-     */
-    public void load() throws IOException {
+public void load() throws IOException {
         lock.writeLock().lock();
         try {
             if (!Files.exists(file)) {

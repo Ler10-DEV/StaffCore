@@ -45,16 +45,14 @@ public class PunishmentService {
         plugin.getStorageProvider().punishments().save(punishment);
         plugin.getStorageProvider().flush();
 
-        // If target is online, kick them
-        if (target.isOnline()) {
+if (target.isOnline()) {
             Player onlineTarget = target.getPlayer();
             if (onlineTarget != null) {
                 onlineTarget.kick(Component.text("§cSunucudan Uzaklaştırıldınız!\n§7Sebep: §e" + reason + "\n§7Ceza No: §b" + id));
             }
         }
 
-        // Send to Discord with Proof button
-        TextChannel channel = plugin.getChannelRegistry().get("ceza_log");
+TextChannel channel = plugin.getChannelRegistry().get("ceza_log");
         if (channel != null) {
             String customId = "proof:add:" + id + ":" + staffUuid;
             channel.sendMessageEmbeds(EmbedFactory.createPunishmentEmbed(punishment))
@@ -63,8 +61,7 @@ public class PunishmentService {
                     ).queue();
         }
 
-        // Notify in-game
-        String broadcast = "§8[§bStaffCore§8] §c" + target.getName() + " §7adlı oyuncuya ceza uygulandı: §e" + reason + " §8(ID: " + id + ")";
+String broadcast = "§8[§bStaffCore§8] §c" + target.getName() + " §7adlı oyuncuya ceza uygulandı: §e" + reason + " §8(ID: " + id + ")";
         Bukkit.broadcast(Component.text(broadcast), "staff.report.view");
 
         return punishment;

@@ -3,9 +3,6 @@ package org.staffcore.storage.model;
 import java.util.Objects;
 import java.util.UUID;
 
-/**
- * Represents a linked account record pairing a Minecraft UUID with a Discord user ID.
- */
 public class LinkRecord {
     private final UUID uuid;
     private final String playerName;

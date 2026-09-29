@@ -41,7 +41,7 @@ public class CsatCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 0) {
-            // Open general rating GUI
+            
             RatingGUI gui = new RatingGUI(plugin, null, null);
             gui.open(player);
             return true;
@@ -49,22 +49,20 @@ public class CsatCommand implements CommandExecutor, TabCompleter {
 
         String firstArg = args[0];
 
-        // 1. Check if firstArg is a Ticket ID (Integer)
-        Integer ticketId = null;
+Integer ticketId = null;
         try {
             ticketId = Integer.parseInt(firstArg);
         } catch (NumberFormatException ignored) {}
 
         if (ticketId != null) {
             if (args.length == 1) {
-                // Open GUI for this specific ticket
+                
                 RatingGUI gui = new RatingGUI(plugin, null, ticketId);
                 gui.open(player);
                 return true;
             }
 
-            // Direct rating with stars
-            try {
+try {
                 int stars = Integer.parseInt(args[1]);
                 String comment = args.length >= 3 ? String.join(" ", Arrays.copyOfRange(args, 2, args.length)) : null;
                 plugin.getCsatListener().getRatingHandler().submitTicketVote(player, ticketId, stars, comment);
@@ -74,10 +72,9 @@ public class CsatCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        // 2. Direct Staff Rating: /puanla <yetkili> [1-5] [yorum]
-        String staffName = firstArg;
+String staffName = firstArg;
         if (args.length == 1) {
-            // Open 5-Star GUI for this staff
+            
             RatingGUI gui = new RatingGUI(plugin, staffName, null);
             gui.open(player);
             return true;

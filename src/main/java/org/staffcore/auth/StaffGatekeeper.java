@@ -1,6 +1,5 @@
 package org.staffcore.auth;
 
-
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.kyori.adventure.text.Component;
@@ -45,8 +44,7 @@ public class StaffGatekeeper implements Listener {
         Player player = event.getPlayer();
         if (!plugin.getConfigManager().isTwoFactorEnabled()) return;
 
-        // Check if player is a linked staff member or has staff permissions
-        boolean hasPerm = player.hasPermission("staff.use") || player.hasPermission("staff.admin");
+boolean hasPerm = player.hasPermission("staff.use") || player.hasPermission("staff.admin");
         Optional<LinkRecord> link = plugin.getStorageProvider().linkedAccounts().findByUuid(player.getUniqueId());
 
         if (hasPerm || (link.isPresent() && link.get().isStaff())) {
@@ -61,8 +59,7 @@ public class StaffGatekeeper implements Listener {
 
         activeQuarantines.put(uuid, state);
 
-        // Apply visual & movement lock
-        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1, false, false, false));
+player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 1, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 255, false, false, false));
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 200, false, false, false));
         player.setWalkSpeed(0f);
@@ -70,8 +67,7 @@ public class StaffGatekeeper implements Listener {
         player.setInvulnerable(true);
         player.setCollidable(false);
 
-        // Send screen title
-        Title title = Title.title(
+Title title = Title.title(
                 Component.text("§c§lYETKİLİ GİRİŞ KALKANI"),
                 Component.text("§eLütfen Discord üzerinden 2FA girişinizi onaylayın."),
                 Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(60), Duration.ofSeconds(1))
@@ -79,15 +75,13 @@ public class StaffGatekeeper implements Listener {
         player.showTitle(title);
         player.sendMessage(plugin.getLocaleManager().getPrefixed("auth.quarantine_subtitle", "&eLütfen Discord üzerinden 2FA girişinizi onaylayın.", null));
 
-        // Schedule timeout fallback (60s)
-        int timeoutSec = plugin.getConfigManager().getTwoFactorTimeoutSeconds();
+int timeoutSec = plugin.getConfigManager().getTwoFactorTimeoutSeconds();
         ScheduledFuture<?> timeoutTask = plugin.getDiscordBot().getAsyncExecutor().schedule(() -> {
             deny(uuid);
         }, timeoutSec, TimeUnit.SECONDS);
         state.setTimeoutTask(timeoutTask);
 
-        // Send Discord notification to channel
-        TextChannel channel = plugin.getChannelRegistry().get("yetkili_onay");
+TextChannel channel = plugin.getChannelRegistry().get("yetkili_onay");
         if (channel != null) {
             channel.sendMessageEmbeds(EmbedFactory.create2FAPrompt(player.getName(), uuid, ip))
                     .setActionRow(
@@ -96,8 +90,7 @@ public class StaffGatekeeper implements Listener {
                     ).queue();
         }
 
-        // Send direct message to linked Discord user if available
-        if (link != null && plugin.getDiscordBot().getJda() != null) {
+if (link != null && plugin.getDiscordBot().getJda() != null) {
             plugin.getDiscordBot().getJda().retrieveUserById(link.getDiscordId()).queue(user -> {
                 user.openPrivateChannel().queue(dm -> {
                     dm.sendMessageEmbeds(EmbedFactory.create2FAPrompt(player.getName(), uuid, ip))
@@ -147,8 +140,7 @@ public class StaffGatekeeper implements Listener {
         });
     }
 
-    // Cancellation Event Handlers
-    @EventHandler(priority = EventPriority.LOWEST)
+@EventHandler(priority = EventPriority.LOWEST)
     public void onMove(PlayerMoveEvent event) {
         if (isQuarantined(event.getPlayer().getUniqueId())) {
             if (event.getFrom().getX() != event.getTo().getX() ||

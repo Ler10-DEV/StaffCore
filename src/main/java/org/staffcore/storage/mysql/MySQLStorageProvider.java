@@ -5,16 +5,6 @@ import org.staffcore.storage.StorageProvider;
 import org.staffcore.storage.StorageType;
 import org.staffcore.storage.dao.*;
 
-/**
- * ==============================================================================
- * MYSQL STORAGE PROVIDER (PLUGGABLE DRIVER STUB)
- * ==============================================================================
- * To implement MySQL database driver:
- * 1. Add com.mysql:mysql-connector-j and com.zaxxer:HikariCP to pom.xml.
- * 2. Implement DAO interfaces using prepared statements and connection pooling.
- * 3. Set `storage.type: mysql` in config.yml.
- * 4. See docs in README.md.
- */
 public class MySQLStorageProvider implements StorageProvider {
 
     @Override

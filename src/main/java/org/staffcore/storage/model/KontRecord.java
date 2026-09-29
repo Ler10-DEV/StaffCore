@@ -2,16 +2,13 @@ package org.staffcore.storage.model;
 
 import java.util.UUID;
 
-/**
- * Represents a historical record of a Kont (forensic inspection) session.
- */
 public class KontRecord {
     private final String id;
     private final UUID targetUuid;
     private final String targetName;
     private final UUID staffUuid;
     private final String staffName;
-    private final String outcome; // CLEAN, HACKS_BANNED, CONFESSION, COMBAT_QUIT
+    private final String outcome; 
     private final long startedAt;
     private final long endedAt;
     private final int durationSeconds;

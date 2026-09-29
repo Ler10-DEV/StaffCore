@@ -36,8 +36,7 @@ public class ReportNotifier {
             }
         }
 
-        // Notify Discord
-        var channel = plugin.getChannelRegistry().get("raporlar");
+var channel = plugin.getChannelRegistry().get("raporlar");
         if (channel != null) {
             channel.sendMessageEmbeds(EmbedFactory.createReportEmbed(reporter, target, category, locStr)).queue();
         }

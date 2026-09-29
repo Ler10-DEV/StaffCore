@@ -59,11 +59,11 @@ public class ReportTicketService implements Listener {
     public void closeTicket(int ticketId, Player staff) {
         ReportTicket ticket = activeTickets.remove(ticketId);
         if (ticket != null) {
-            // Give staff score
+            
             if (staff != null) {
                 plugin.getScoreEngine().awardScore(staff.getUniqueId(), staff.getName(), "report_resolved", "Rapor #" + ticketId + " çözüldü");
             }
-            // Trigger CSAT prompt to reporter
+            
             if (plugin.getConfigManager().isCsatEnabled()) {
                 plugin.getCsatListener().sendCsatPrompt(ticket.reporterUuid(), ticketId, staff != null ? staff.getName() : "Yetkili");
             }

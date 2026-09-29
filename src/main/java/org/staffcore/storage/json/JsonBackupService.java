@@ -12,9 +12,6 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * Manages automated and on-demand zip backups of the data directory.
- */
 public class JsonBackupService {
     private final Path dataDir;
     private final Path backupDir;
@@ -29,13 +26,7 @@ public class JsonBackupService {
         this.logger = logger;
     }
 
-    /**
-     * Creates a compressed zip backup of the data folder immediately.
-     *
-     * @return Path to the created zip file
-     * @throws IOException If zip creation fails
-     */
-    public synchronized Path createBackupNow() throws IOException {
+public synchronized Path createBackupNow() throws IOException {
         if (!Files.exists(dataDir)) {
             Files.createDirectories(dataDir);
         }
@@ -49,7 +40,7 @@ public class JsonBackupService {
             Files.walkFileTree(dataDir, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    // Avoid copying .tmp files
+                    
                     if (file.getFileName().toString().endsWith(".tmp")) {
                         return FileVisitResult.CONTINUE;
                     }
@@ -69,10 +60,7 @@ public class JsonBackupService {
         return zipFile;
     }
 
-    /**
-     * Purges backup archives older than the configured retention days.
-     */
-    public void purgeOldBackups() {
+public void purgeOldBackups() {
         if (!Files.exists(backupDir)) return;
         long cutoffMillis = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(retentionDays);
 

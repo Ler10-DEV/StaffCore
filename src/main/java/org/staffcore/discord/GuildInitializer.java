@@ -60,7 +60,7 @@ public class GuildInitializer {
             if (channel == null) {
                 var action = staffCategory.createTextChannel(name);
                 if (staffRole != null && !key.equals("hesap_esle")) {
-                    // Make private to staff
+                    
                     action = action.addRolePermissionOverride(guild.getPublicRole().getIdLong(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                             .addRolePermissionOverride(staffRole.getIdLong(), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND), null);
                 }

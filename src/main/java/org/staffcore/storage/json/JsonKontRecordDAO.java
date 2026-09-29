@@ -68,7 +68,7 @@ public class JsonKontRecordDAO implements KontRecordDAO {
     @Override
     public synchronized void addRecord(KontRecord record) {
         if (record == null) return;
-        records.add(0, record); // Most recent first
+        records.add(0, record); 
         while (records.size() > MAX_RECORDS) {
             records.remove(records.size() - 1);
         }

@@ -46,8 +46,7 @@ public class ScoreEngine {
         int delta = plugin.getConfigManager().getScoreDelta(actionKey, getDefaultDelta(actionKey));
         record.addScore(delta);
 
-        // Update specific counters
-        switch (actionKey) {
+switch (actionKey) {
             case "report_resolved" -> record.incrementReportsResolved();
             case "kont_clean", "kont_hacks_banned", "kont_confession" -> record.incrementKontsCompleted();
             case "punishment_verified" -> record.incrementPunishmentsIssued();
@@ -57,8 +56,7 @@ public class ScoreEngine {
 
         plugin.getStorageProvider().staffScores().save(record);
 
-        // Append to score_events.jsonl audit log
-        ScoreEvent event = new ScoreEvent(
+ScoreEvent event = new ScoreEvent(
                 UUID.randomUUID().toString(),
                 staffUuid,
                 staffName != null ? staffName : record.getStaffName(),
@@ -71,8 +69,7 @@ public class ScoreEngine {
         plugin.getStorageProvider().staffScores().logEvent(event);
         plugin.getStorageProvider().flush();
 
-        // Check low score threshold warning
-        int threshold = plugin.getConfigManager().getLowScoreThreshold();
+int threshold = plugin.getConfigManager().getLowScoreThreshold();
         if (record.getTotalScore() < threshold) {
             Player p = Bukkit.getPlayer(staffUuid);
             if (p != null) {
